@@ -12,22 +12,22 @@ import java.io.Serializable;
  * @author DELL
  */
 public class Video implements Serializable{
-    private int id;
+    private String id;
     private String link;
 
     public Video() {
     }
 
-    public Video(int id, String link) {
+    public Video(String id, String link) {
         this.id = id;
         this.link = link;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

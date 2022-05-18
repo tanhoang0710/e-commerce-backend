@@ -54,7 +54,7 @@ public class VideoWS {
     
     @DELETE
     @Path("{id}")
-    public String deleteOne(@PathParam("id") String id) {
+    public String deleteOneVideo(@PathParam("id") String id) {
         
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json;

@@ -50,7 +50,7 @@ public class ProductDAO implements Serializable {
 
             rs = stm.executeQuery();
             while (rs.next()) {
-                productList.add(new Product(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+                productList.add(new Product(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -64,7 +64,7 @@ public class ProductDAO implements Serializable {
         try {
             String sql = "insert into Product values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stm = conn.prepareStatement(sql);
-            stm.setInt(1, product.getId());
+            stm.setString(1, product.getId());
             stm.setInt(2, product.getSale());
             stm.setString(3, product.getImg());
             stm.setString(4, product.getLabel());
@@ -102,7 +102,7 @@ public class ProductDAO implements Serializable {
 
             stm.setString(1, id);
             if (stm.executeUpdate() > 0) {
-                return "Xoá thành công";
+                return id + "";
             }
 
         } catch (Exception e) {
@@ -112,8 +112,9 @@ public class ProductDAO implements Serializable {
         return null;
     }
 
-    public String editOneProduct(Product product) {
+    public Product editOneProduct(Product product) {
         PreparedStatement stm;
+        Product product1 = new Product();
         try {
             String sql = ""
                     + "UPDATE Product "
@@ -127,9 +128,18 @@ public class ProductDAO implements Serializable {
             stm.setString(4, product.getOldPrice());
             stm.setString(5, product.getNewPrice());
             stm.setString(6, product.getDesc());
-            stm.setInt(7, product.getId());
+            stm.setString(7, product.getId());
             if (stm.executeUpdate() > 0) {
-                return "Sửa sản phẩm thành công";
+                product1.setId(product.getId());
+                product1.setSale(product.getSale());
+                product1.setImg(product.getImg());
+                product1.setLabel(product.getLabel());
+                product1.setName(product.getName());
+                product1.setOldPrice(product.getOldPrice());
+                product1.setNewPrice(product.getNewPrice());
+                product1.setDesc(product.getDesc());
+                product1.setCategoryId(product.getCategoryId());
+                return product1;
             }
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -44,7 +44,7 @@ public class VideoDAO implements Serializable{
             
             rs = stm.executeQuery();
             while (rs.next()) {
-                videoList.add(new Video(rs.getInt(1), rs.getString(2)));
+                videoList.add(new Video(rs.getString(1), rs.getString(2)));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -58,7 +58,7 @@ public class VideoDAO implements Serializable{
         try {
             String sql = "insert into Video values(?, ?)";
             stm = conn.prepareStatement(sql);
-            stm.setInt(1, video.getId());
+            stm.setString(1, video.getId());
             stm.setString(2, video.getLink());
             if(stm.executeUpdate() > 0) {
                 vid.setId(video.getId());
@@ -82,7 +82,7 @@ public class VideoDAO implements Serializable{
             
             stm.setString(1, id);
             if (stm.executeUpdate() > 0) {
-                return "Xoá thành công";
+                return id + "";
             }
             
         } catch (Exception e) {

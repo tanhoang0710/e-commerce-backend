@@ -46,7 +46,7 @@ public class DiscountCodeDAO implements Serializable {
 
             rs = stm.executeQuery();
             while (rs.next()) {
-                DiscountCodeList.add(new DiscountCode(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)));
+                DiscountCodeList.add(new DiscountCode(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -61,7 +61,7 @@ public class DiscountCodeDAO implements Serializable {
         try {
             String sql = "insert into DiscountCode values(?, ?, ?, ?, ?, ?, ?)";
             stm = conn.prepareStatement(sql);
-            stm.setInt(1, discountCode.getId());
+            stm.setString(1, discountCode.getId());
             stm.setString(2, discountCode.getCode());
             stm.setInt(3, discountCode.getValue());
             stm.setString(4, discountCode.getStatus());
@@ -86,8 +86,9 @@ public class DiscountCodeDAO implements Serializable {
         return null;
     }
 
-    public String editOneDiscountCode(DiscountCode discountCode) {
+    public DiscountCode editOneDiscountCode(DiscountCode discountCode) {
         PreparedStatement stm;
+        DiscountCode dsCode = new DiscountCode();
         try {
             String sql = "UPDATE DiscountCode\n"
                     + "SET code = ?, value = ?, status = ?, time = ?, [from] = ?, [to] = ?\n"
@@ -100,9 +101,16 @@ public class DiscountCodeDAO implements Serializable {
             stm.setInt(4, discountCode.getTime());
             stm.setString(5, discountCode.getFrom());
             stm.setString(6, discountCode.getTo());
-            stm.setInt(7, discountCode.getId());
+            stm.setString(7, discountCode.getId());
             if (stm.executeUpdate() > 0) {
-                return "Sửa mã giảm giá thành công";
+                dsCode.setId(discountCode.getId());
+                dsCode.setCode(discountCode.getCode());
+                dsCode.setValue(discountCode.getValue());
+                dsCode.setStatus(discountCode.getStatus());
+                dsCode.setTime(discountCode.getTime());
+                dsCode.setFrom(discountCode.getFrom());
+                dsCode.setTo(discountCode.getTo());
+                return dsCode;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -119,7 +127,7 @@ public class DiscountCodeDAO implements Serializable {
 
             stm.setString(1, id);
             if (stm.executeUpdate() > 0) {
-                return "Xoá thành công";
+                return id + "";
             }
 
         } catch (Exception e) {

@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author DELL
  */
 public class DiscountCode implements Serializable{
-    private int id;
+    private String id;
     private String code;
     private int value;
     private String status;
@@ -23,7 +23,7 @@ public class DiscountCode implements Serializable{
     public DiscountCode() {
     }
 
-    public DiscountCode(int id, String code, int value, String status, int time, String from, String to) {
+    public DiscountCode(String id, String code, int value, String status, int time, String from, String to) {
         this.id = id;
         this.code = code;
         this.value = value;
@@ -33,11 +33,11 @@ public class DiscountCode implements Serializable{
         this.to = to;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

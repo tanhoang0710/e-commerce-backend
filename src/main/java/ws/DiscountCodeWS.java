@@ -59,7 +59,7 @@ public class DiscountCodeWS {
     @Path("{id}")
     public String updateOne(@PathParam("id") String id, DiscountCode discountCode) {
 
-        discountCode.setId(Integer.parseInt(id));
+        discountCode.setId(id);
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json;
         try {

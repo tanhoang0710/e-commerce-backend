@@ -54,9 +54,9 @@ public class ProductWS {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public String updateOne(@PathParam("id") String id, Product product) {
+    public String editOneProduct(@PathParam("id") String id, Product product) {
 
-        product.setId(Integer.parseInt(id));
+        product.setId(id);
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json;
         try {
@@ -70,7 +70,7 @@ public class ProductWS {
     
     @DELETE
     @Path("{id}")
-    public String deleteOne(@PathParam("id") String id) {
+    public String deleteOneProduct(@PathParam("id") String id) {
         
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json;

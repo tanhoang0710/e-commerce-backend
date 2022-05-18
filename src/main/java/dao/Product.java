@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author DELL
  */
 public class Product implements Serializable{
-    private int id;
+    private String id;
     private int sale;
     private String img;
     private String label;
@@ -25,7 +25,7 @@ public class Product implements Serializable{
     public Product() {
     }
 
-    public Product(int id, int sale, String img, String label, String name, String oldPrice, String newPrice, String desc, String categoryId) {
+    public Product(String id, int sale, String img, String label, String name, String oldPrice, String newPrice, String desc, String categoryId) {
         this.id = id;
         this.sale = sale;
         this.img = img;
@@ -37,11 +37,11 @@ public class Product implements Serializable{
         this.categoryId = categoryId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
