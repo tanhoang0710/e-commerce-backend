@@ -54,6 +54,30 @@ public class DiscountCodeDAO implements Serializable {
         return DiscountCodeList;
     }
 
+    public DiscountCode getOne(String code) {
+
+        PreparedStatement stm;
+        ResultSet rs;
+
+        DiscountCode dsCode;
+        try {
+
+            String sql = "SELECT * FROM DiscountCode\n"
+                    + "WHERE code = ? ";
+            stm = conn.prepareStatement(sql);
+            stm.setString(1, code);
+            
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                dsCode = new DiscountCode(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7));
+                return dsCode;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public DiscountCode addOneDiscountCode(DiscountCode discountCode) {
 
         PreparedStatement stm;

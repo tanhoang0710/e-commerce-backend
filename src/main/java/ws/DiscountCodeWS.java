@@ -39,6 +39,23 @@ public class DiscountCodeWS {
     public List<DiscountCode> getDiscountCodes() {
         return dao.getAll();
     }
+    
+    @GET
+    @Path("{code}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getOne(@PathParam("code") String code) {
+
+        DiscountCode dsCode = dao.getOne(code);
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json;
+        try {
+            json = ow.writeValueAsString(dao.getOne(code));
+            return json;
+        } catch (JsonProcessingException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
