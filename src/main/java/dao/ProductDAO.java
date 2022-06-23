@@ -57,6 +57,27 @@ public class ProductDAO implements Serializable {
         }
         return productList;
     }
+    
+    public List<Product> getByName(String name) {
+
+        PreparedStatement stm;
+        ResultSet rs;
+
+        List<Product> productList = new ArrayList<>();
+        try {
+
+            String sql = "select * from Product where [name] like N'%" + name + "%'";
+            stm = conn.prepareStatement(sql);  
+
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                productList.add(new Product(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return productList;
+    }
 
     public Product addOneProduct(Product product) {
         PreparedStatement stm;

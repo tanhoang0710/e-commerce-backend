@@ -37,6 +37,13 @@ public class ProductWS {
         return productDAO.getAllByType(type);
     }
     
+    @GET
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> getProductsByName(@QueryParam("q") String name) {
+        return productDAO.getByName(name);
+    }
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String addOneProduct(Product product) {
